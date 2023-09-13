@@ -1,0 +1,52 @@
+---
+import { SEO } from "astro-seo";
+import { config } from "@/constants/config";
+import type { HeadTags } from "@/utils/types/HeadTags";
+
+type Props = HeadTags;
+
+const { title, description, noindex, og } = Astro.props;
+
+const DEFAULT_TITLE_PAGE = config.defaultTitle;
+const DEFAULT_DESCRIPTION_PAGE = config.defaultDescription;
+const DEFAULT_URL_SITE = config.website_url;
+
+const openGraph = {
+  title: title || og?.title || DEFAULT_TITLE_PAGE,
+  type: og?.type || "website",
+  image: og?.image || "",
+  alt: og?.alt || "",
+  url: DEFAULT_URL_SITE,
+  description: og?.description || DEFAULT_DESCRIPTION_PAGE,
+};
+---
+
+<head>
+  <SEO
+    charset="UTF-8"
+    title={title || DEFAULT_TITLE_PAGE}
+    description={description || DEFAULT_DESCRIPTION_PAGE}
+    noindex={noindex || false}
+    openGraph={{
+      basic: {
+        title: openGraph.title,
+        type: openGraph.type,
+        image: openGraph.image,
+      },
+      image: {
+        alt: openGraph.alt,
+      },
+    }}
+    ,
+    extend={{
+      link: [
+        { rel: "icon", href: "/favicon.png" },
+        { rel: "sitemap", href: "/sitemap-index.xml" },
+      ],
+      meta: [
+        { name: "viewport", content: "width=device-width, initial-scale=1" },
+        { name: "generator", content: Astro.generator },
+      ],
+    }}
+  />
+</head>

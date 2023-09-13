@@ -1,0 +1,47 @@
+---
+import BasicLayout from "@/layouts/BasicLayout.astro";
+import { projects } from "@/data";
+import ProjectCard from "@/components/ProjectCard.astro";
+import { config } from "@/constants/config";
+---
+
+<BasicLayout>
+  <h1 class="flex text-3xl text-white">
+    Hello there, I'm Andreas <span class="animate-waving-hand ml-2">👋</span>
+  </h1>
+  <p class="w-auto max-w-[60ch] leading-6">
+    Buongiorno, I'm a developer with a huge interest for web development. I am
+    mostly working with <a
+      href="https://nextjs.org/"
+      target="_blank"
+      class="text-blue-400">NextJS</a
+    >, <a href="https://nodejs.org/en" target="_blank" class="text-blue-400"
+      >NodeJs</a
+    >
+    and <a
+      href="https://www.typescriptlang.org/"
+      target="_blank"
+      class="text-blue-400">Typescript</a
+    >. Except from the programming, I love to watch football and spend time with
+    people I care for.
+  </p>
+  <article class="flex flex-col gap-8">
+    <header class="flex w-full flex-row justify-between gap-2">
+      <h3 class="text-lg text-neutral-100">
+        Selected projects ({projects.length})
+      </h3>
+    </header>
+
+    <section class="flex flex-col gap-4">
+      {projects.map((project) => <ProjectCard {...project} />)}
+    </section>
+  </article>
+  <article class="flex flex-col gap-8">
+    <header class="flex w-full flex-row justify-between gap-2">
+      <h3 class="text-lg text-neutral-100 underline">
+        <a href={`mailto:${config.mail}`}>Get in touch</a>
+      </h3>
+    </header>
+    <p></p>
+  </article>
+</BasicLayout>

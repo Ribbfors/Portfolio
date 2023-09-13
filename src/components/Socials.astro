@@ -1,0 +1,17 @@
+---
+import { socials } from "@/data";
+---
+
+<ul class="flex flex-row gap-2">
+  {
+    socials.map((social, index) => (
+      <>
+        <li>
+          <a href={social.link}>{social.label}</a>
+        </li>
+
+        {socials.length - 1 !== index && <li>/</li>}
+      </>
+    ))
+  }
+</ul>
